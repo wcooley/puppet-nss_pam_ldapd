@@ -128,5 +128,12 @@
 uid nslcd
 gid ldap
 # This comment prevents repeated auto-migration of settings.
-uri ldap://127.0.0.1/
-base dc=example,dc=com
+uri<% ldap['uris'].each do |uri| -%> <%= uri %><% end %>
+base <%= ldap['basedn'] %>
+ssl <%= ldap['ssl'] %>
+tls_checkpeer <%= ldap['tls_checkpeer'] %>
+tls_reqcert <%= ldap['tls_reqcert'] %>
+tls_cacertdir <%= ldap['tls_cacertdir'] %>
+timelimit <%= ldap['timelimit'] %>
+bind_timelimit <%= ldap['bind_timelimit'] %>
+idle_timelimit <%= ldap['idle_timelimit'] %>

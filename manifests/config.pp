@@ -1,4 +1,4 @@
-class nss_pam_ldapd::config (
+class nss_pam_ldapd::config {
   $ldap = hiera('nss_pam_ldapd::config::ldap', {
         uris           => [ 'ldap://localhost', ],
         basedn         => 'dc=example,dc=com',

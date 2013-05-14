@@ -131,7 +131,6 @@ gid ldap
 uri<% ldap['uris'].each do |uri| -%> <%= uri %><% end %>
 base <%= ldap['basedn'] %>
 ssl <%= ldap['ssl'] %>
-tls_checkpeer <%= ldap['tls_checkpeer'] %>
 tls_reqcert <%= ldap['tls_reqcert'] %>
 tls_cacertdir <%= ldap['tls_cacertdir'] %>
 timelimit <%= ldap['timelimit'] %>

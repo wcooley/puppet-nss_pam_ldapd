@@ -1,4 +1,4 @@
-class nss_pam_ldapd::config {
+class nss_pam_ldapd::config (
   $ldap = hiera('nss_pam_ldapd::config::ldap', {
         uris           => [ 'ldap://localhost', ],
         basedn         => 'dc=example,dc=com',
@@ -10,6 +10,7 @@ class nss_pam_ldapd::config {
         bind_timelimit => 120,
         idle_timelimit => 3600,
       })
+  ) {
 
   file { '/etc/nslcd.conf':
     content => template('nss_pam_ldapd/nslcd.conf.erb'),

@@ -27,8 +27,8 @@ In manifests somewhere:
 
 Author
 -------
-Wil Cooley wcooley(at)nakedape.cc
-Dan Young dmy(at)pdx.edu
+* Wil Cooley wcooley(at)nakedape.cc
+* Dan Young dmy(at)pdx.edu
 
 License
 -------

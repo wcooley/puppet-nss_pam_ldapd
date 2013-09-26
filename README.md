@@ -55,4 +55,4 @@ Support
 
 Please log tickets and issues at our [Github project][1].
 
-[1]. https://github.com/wcooley/puppet-nss_pam_ldapd/issues
+[1]: https://github.com/wcooley/puppet-nss_pam_ldapd/issues

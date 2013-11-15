@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wcooley/puppet-nss_pam_ldapd.png?branch=master)](https://travis-ci.org/wcooley/puppet-nss_pam_ldapd)
+
 nss_pam_ldapd
 =============
 

@@ -27,6 +27,12 @@ In manifests somewhere:
 
         include nss_pam_ldapd
 
+TODO
+----
+
+This package currently hardcodes the package, service and config file names
+for EL6 but with a little work could work for other applicable platforms.
+
 Author
 -------
 * Wil Cooley wcooley(at)nakedape.cc

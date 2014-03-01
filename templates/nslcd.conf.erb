@@ -132,6 +132,8 @@ uri<% @ldap['uris'].each do |uri| -%> <%= uri %><% end %>
 base <%= @ldap['basedn'] %>
 <% if @ldap['ssl'] %>
 ssl <%= @ldap['ssl'] %>
+<% else %>
+ssl off
 <% end %>
 <% if @ldap['tls_reqcert'] %>
 tls_reqcert <%= @ldap['tls_reqcert'] %>

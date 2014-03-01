@@ -24,8 +24,6 @@ class nss_pam_ldapd::config (
     }
   }
 
-  notify {"nslcd uid: ${uid}":}
-
   file { '/etc/nslcd.conf':
     content => template($template),
     mode    => '0400',

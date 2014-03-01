@@ -125,14 +125,26 @@
 #map    group  cn               groupName
 #map    group  uniqueMember     member
 #map    group  gidNumber        gid
-uid nslcd
-gid ldap
+uid <%= @uid %>
+gid <%= @gid %>
 # This comment prevents repeated auto-migration of settings.
 uri<% @ldap['uris'].each do |uri| -%> <%= uri %><% end %>
 base <%= @ldap['basedn'] %>
+<% if @ldap['ssl'] %>
 ssl <%= @ldap['ssl'] %>
+<% end %>
+<% if @ldap['tls_reqcert'] %>
 tls_reqcert <%= @ldap['tls_reqcert'] %>
+<% end %>
+<% if @ldap['tls_cacertdir'] %>
 tls_cacertdir <%= @ldap['tls_cacertdir'] %>
+<% if @ldap['timelimit'] %>
+<% end %>
 timelimit <%= @ldap['timelimit'] %>
+<% end %>
+<% if @ldap['bind_timelimit'] %>
 bind_timelimit <%= @ldap['bind_timelimit'] %>
+<% end %>
+<% if @ldap['idle_timelimit'] %>
 idle_timelimit <%= @ldap['idle_timelimit'] %>
+<% end %>

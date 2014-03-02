@@ -15,11 +15,11 @@ class nss_pam_ldapd::config (
 
   case $::osfamily {
     redhat: { 
-      $uid = 'nslcd',
+      $uid = 'nslcd'
       $gid = 'ldap' 
     }
     debian: { 
-      $uid = 'nslcd',
+      $uid = 'nslcd'
       $gid = 'nslcd'
     }
   }

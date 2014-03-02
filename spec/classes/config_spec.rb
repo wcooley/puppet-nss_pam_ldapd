@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hiera-puppet'
+require 'hiera_puppet'
 
 describe 'nss_pam_ldapd::config' do
   context 'default' do

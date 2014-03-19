@@ -13,6 +13,19 @@ class nss_pam_ldapd::config (
   $template = 'nss_pam_ldapd/nslcd.conf.erb'
   ) {
 
+
+  case $::osfamily {
+    redhat: {
+      $uid = 'nslcd'
+      $gid = 'ldap'
+    }
+    default: {
+    # Default applies to Debian but seems sensible enough to be generic
+      $uid = 'nslcd'
+      $gid = 'nslcd'
+    }
+  }
+
   file { '/etc/nslcd.conf':
     content => template($template),
     mode    => '0400',

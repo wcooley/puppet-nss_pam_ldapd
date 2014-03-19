@@ -1,0 +1,9 @@
+fixtures:
+  symlinks:
+    nss_pam_ldapd: "#{source_dir}"
+  repositories:
+    # Compat for Puppet < 3.0
+    # (installing the gem does not seem to suffice)
+    'hiera-puppet':
+      repo: 'git@github.com:puppetlabs/hiera-puppet.git'
+      ref: '1.0.0'

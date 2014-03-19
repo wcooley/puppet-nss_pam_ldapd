@@ -8,6 +8,9 @@ class nss_pam_ldapd::params {
     redhat: {
       $packages = [ 'nss-pam-ldapd' ]
     }
+    debian: {
+      $packages = [ 'nslcd' ]
+    }
     default: {
       fail_unconfigured()
     }

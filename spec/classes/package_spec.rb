@@ -6,6 +6,11 @@ describe 'nss_pam_ldapd::package' do
     it { should contain_package('nss-pam-ldapd').with(:ensure => 'installed') }
   end
 
+  context 'debian' do
+    let(:facts) {{ :osfamily => 'Debian' }}
+    it { should contain_package('nslcd').with(:ensure => 'installed') }
+  end
+
   context 'unsupported OS' do
     let(:facts) {{ :osfamily => 'Flibitty Flim-Flam' }}
     it do

@@ -7,3 +7,4 @@ license 'Apache License, Version 2.0'
 project_page 'https://github.com/wcooley/puppet-nss_pam_ldapd'
 description 'Manages the installation, configuration and service nss-pam-ldapd
 for EL6 systems.'
+dependency  'wcooley/fail_unconfigured'

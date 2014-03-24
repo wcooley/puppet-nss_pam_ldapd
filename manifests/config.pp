@@ -18,6 +18,16 @@ class nss_pam_ldapd::config (
           true    => join($ldap['uri'], ' '),
           default => $ldap['uri'],
       }
+  }
+  elsif has_key($ldap, 'uris') {
+    warning('nss_pam_ldapd::config::ldap param "uris" is deprecated; use "uri" instead')
+    $ldap_uri_val = is_array($ldap['uris']) ? {
+          true    => join($ldap['uris'], ' '),
+          default => $ldap['uris'],
+      }
+  }
+
+  if $ldap_uri_val {
     $aug_uri = "set uri '${ldap_uri_val}'"
   }
   else {

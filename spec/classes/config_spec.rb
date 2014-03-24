@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe 'nss_pam_ldapd::config' do
-  context 'default' do
+  context 'Red Hat defaults' do
+    let(:facts) {{ :osfamily => 'RedHat' }}
+
     it { should contain_file('/etc/nslcd.conf').with({
         :mode => '0400',
         :owner => 'root',
@@ -14,6 +16,8 @@ describe 'nss_pam_ldapd::config' do
   end
 
   context 'non-default' do
+    let(:facts) {{ :osfamily => 'RedHat' }}
+
     let(:params) do {
         :ldap => {
           'uris' => ['ldap://ldap1.example.com', 'ldap://ldap2.example.com' ],

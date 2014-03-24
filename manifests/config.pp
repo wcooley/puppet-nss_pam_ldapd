@@ -1,6 +1,6 @@
 class nss_pam_ldapd::config (
   $ldap = hiera('nss_pam_ldapd::config::ldap', {
-        uris           => [ 'ldap://localhost', ],
+        uri           => [ 'ldap://localhost', ],
         basedn         => 'dc=example,dc=com',
         ssl            => 'start_tls',
         tls_checkpeer  => 'no',
@@ -13,10 +13,10 @@ class nss_pam_ldapd::config (
   $template = 'nss_pam_ldapd/nslcd.conf.erb'
   ) {
 
-  if has_key($ldap, 'uris') {
-    $ldap_uri_val = is_array($ldap['uris']) ? {
-          true    => join($ldap['uris'], ' '),
-          default => $ldap['uris'],
+  if has_key($ldap, 'uri') {
+    $ldap_uri_val = is_array($ldap['uri']) ? {
+          true    => join($ldap['uri'], ' '),
+          default => $ldap['uri'],
       }
     $aug_uri = "set uri '${ldap_uri_val}'"
   }

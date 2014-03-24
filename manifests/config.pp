@@ -14,7 +14,10 @@ class nss_pam_ldapd::config (
   ) {
 
   if has_key($ldap, 'uris') {
-    $ldap_uri_val = join($ldap['uris'], ' ')
+    $ldap_uri_val = is_array($ldap['uris']) ? {
+          true    => join($ldap['uris'], ' '),
+          default => $ldap['uris'],
+      }
     $aug_uri = "set uri '${ldap_uri_val}'"
   }
   else {

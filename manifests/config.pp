@@ -39,10 +39,16 @@ class nss_pam_ldapd::config (
     $aug_uri = undef
   }
 
-  $aug_base = has_key($ldap, 'base') ? {
-        true => "set base '${ldap['base']}'",
-        default => undef,
-      }
+  if has_key($ldap, 'base') {
+    $aug_base = "set base '${ldap['base']}'"
+  }
+  elsif has_key($ldap, 'basedn') {
+    warning("${name} param 'basedn' is deprecated; use 'base' instead")
+    $aug_base = "set base '${ldap['basedn']}'"
+  }
+  else {
+    $aug_base = undef
+  }
 
   $aug_ssl = has_key($ldap, 'ssl') ? {
         true    => "set ssl '${ldap['ssl']}'",

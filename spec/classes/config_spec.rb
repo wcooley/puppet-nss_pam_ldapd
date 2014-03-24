@@ -15,7 +15,7 @@ describe 'nss_pam_ldapd::config' do
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([
                       %q{set uri 'ldap://localhost'},
-                      %q{set basedn 'dc=example,dc=com'},
+                      %q{set base 'dc=example,dc=com'},
                       %q{set ssl 'start_tls'},
                       %q{set tls_checkpeer 'no'},
                       %q{set tls_cacertdir '/etc/openldap/cacerts'},
@@ -32,7 +32,7 @@ describe 'nss_pam_ldapd::config' do
     lp = {
       'uri'           => ['ldap://ldap1.example.com',
                            'ldap://ldap2.example.com' ],
-      'basedn'         => 'o=example org,c=us',
+      'base'           => 'o=example org,c=us',
       'ssl'            => 'broken',
       'tls_checkpeer'  => 'yes',
       'tls_cacertdir'  => '/etc/pki/tls',
@@ -47,7 +47,7 @@ describe 'nss_pam_ldapd::config' do
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([
                       %Q<set uri '#{lp['uri'].join(' ')}'>,
-                      %Q<set basedn '#{lp['basedn']}'>,
+                      %Q<set base '#{lp['base']}'>,
                       %Q<set ssl '#{lp['ssl']}'>,
                       %Q<set tls_checkpeer '#{lp['tls_checkpeer']}'>,
                       %Q<set tls_cacertdir '#{lp['tls_cacertdir']}'>,

@@ -113,4 +113,30 @@ describe 'nss_pam_ldapd::config' do
 
   end
 
+  context 'compat param basedn: only basedn' do
+
+    let(:params) {{ :ldap => { 'basedn' => 'o=foo org' } }}
+
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([ %q<set base 'o=foo org'> ])
+    }
+
+  end
+
+  context 'compat param basedn: base wins' do
+
+    let(:params) {{
+      :ldap      => {
+        'basedn' => 'o=foo org',
+        'base'   => 'o=bar',
+      }
+    }}
+
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([ %q<set base 'o=bar'> ])
+    }
+
+  end
+
+
 end

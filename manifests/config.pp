@@ -20,7 +20,8 @@ class nss_pam_ldapd::config (
       }
   }
   elsif has_key($ldap, 'uris') {
-    warning('nss_pam_ldapd::config::ldap param "uris" is deprecated; use "uri" instead')
+
+    warning("${name} param 'uris' is deprecated; use 'uri' instead")
     $ldap_uri_val = is_array($ldap['uris']) ? {
           true    => join($ldap['uris'], ' '),
           default => $ldap['uris'],

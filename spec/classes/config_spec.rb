@@ -61,11 +61,7 @@ describe 'nss_pam_ldapd::config' do
 
   context 'All params undefined' do
 
-    lp = {
-      'canary'         => 'peep',
-    }
-
-    let(:params) {{ :ldap => lp }}
+    let(:params) {{ :ldap => {} }}
 
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([])

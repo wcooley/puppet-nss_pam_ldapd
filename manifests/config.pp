@@ -1,7 +1,7 @@
 class nss_pam_ldapd::config (
   $ldap = hiera('nss_pam_ldapd::config::ldap', {
         uri           => [ 'ldap://localhost', ],
-        basedn         => 'dc=example,dc=com',
+        base           => 'dc=example,dc=com',
         ssl            => 'start_tls',
         tls_checkpeer  => 'no',
         tls_cacertdir  => '/etc/openldap/cacerts',
@@ -39,8 +39,8 @@ class nss_pam_ldapd::config (
     $aug_uri = undef
   }
 
-  $aug_basedn = has_key($ldap, 'basedn') ? {
-        true => "set basedn '${ldap['basedn']}'",
+  $aug_base = has_key($ldap, 'base') ? {
+        true => "set base '${ldap['base']}'",
         default => undef,
       }
 
@@ -81,7 +81,7 @@ class nss_pam_ldapd::config (
 
   $augeas_changes = grep([
       $aug_uri,
-      $aug_basedn,
+      $aug_base,
       $aug_ssl,
       $aug_tls_checkpeer,
       $aug_tls_cacertdir,

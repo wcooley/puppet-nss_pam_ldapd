@@ -11,6 +11,18 @@ describe 'nss_pam_ldapd::config' do
       })
     }
 
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([
+                      %q{set uri 'ldap://localhost'},
+                      %q{set basedn 'dc=example,dc=com'},
+                      %q{set ssl 'start_tls'},
+                      %q{set tls_checkpeer 'no'},
+                      %q{set tls_cacertdir '/etc/openldap/cacerts'},
+                      %q{set tls_reqcert 'never'},
+                      %q{set timelimit '120'},
+                      %q{set bind_timelimit '120'},
+                      %q{set idle_timelimit '3600'}
+      ])
     }
   end
 

@@ -13,10 +13,29 @@ class nss_pam_ldapd::config (
   $template = 'nss_pam_ldapd/nslcd.conf.erb'
   ) {
 
+  $ldap_uri_val = join($ldap['uris'], ' ')
+
+  $augeas_changes = [
+      "set uri '${ldap_uri_val}'",
+      "set basedn '${ldap[basedn]}'",
+      "set ssl '${ldap[ssl]}'",
+      "set tls_checkpeer '${ldap[tls_checkpeer]}'",
+      "set tls_cacertdir '${ldap[tls_cacertdir]}'",
+      "set tls_reqcert '${ldap[tls_reqcert]}'",
+      "set timelimit '${ldap[timelimit]}'",
+      "set bind_timelimit '${ldap[bind_timelimit]}'",
+      "set idle_timelimit '${ldap[idle_timelimit]}'",
+  ]
+
   file { '/etc/nslcd.conf':
-    content => template($template),
     mode    => '0400',
     owner   => 'root',
     group   => 'root',
+  }
+
+  augeas { '/etc/nslcd.conf':
+    lens    => 'Spacevars.lns',
+    incl    => '/etc/nslcd.conf',
+    changes => $augeas_changes,
   }
 }

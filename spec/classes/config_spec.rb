@@ -57,6 +57,19 @@ describe 'nss_pam_ldapd::config' do
                       %Q<set idle_timelimit '#{lp['idle_timelimit']}'>,
       ])
     }
+  end
 
+  context 'All params undefined' do
+    let(:facts) {{ :osfamily => 'redhat' }}
+
+    lp = {
+      'canary'         => 'peep',
+    }
+
+    let(:params) {{ :ldap => lp }}
+
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([])
+    }
   end
 end

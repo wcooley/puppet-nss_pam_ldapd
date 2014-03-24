@@ -67,4 +67,14 @@ describe 'nss_pam_ldapd::config' do
       .with_changes([])
     }
   end
+
+  context 'uri param as single-value array' do
+
+    let(:params) {{ :ldap => { 'uris' => ['ldap://ldap1 ldap://ldap2'] } }}
+
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([ %q<set uri 'ldap://ldap1 ldap://ldap2'> ])
+    }
+
+  end
 end

@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe 'nss_pam_ldapd::config' do
+  let(:facts) {{ :osfamily => 'redhat' }}
+
   context 'Red Hat defaults' do
-    let(:facts) {{ :osfamily => 'RedHat' }}
 
     it { should contain_file('/etc/nslcd.conf').with({
         :mode => '0400',
@@ -27,7 +28,6 @@ describe 'nss_pam_ldapd::config' do
   end
 
   context 'All params non-default' do
-    let(:facts) {{ :osfamily => 'redhat' }}
 
     lp = {
       'uris'           => ['ldap://ldap1.example.com',
@@ -60,7 +60,6 @@ describe 'nss_pam_ldapd::config' do
   end
 
   context 'All params undefined' do
-    let(:facts) {{ :osfamily => 'redhat' }}
 
     lp = {
       'canary'         => 'peep',

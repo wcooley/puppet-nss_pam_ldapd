@@ -30,7 +30,7 @@ describe 'nss_pam_ldapd::config' do
   context 'All params non-default' do
 
     lp = {
-      'uris'           => ['ldap://ldap1.example.com',
+      'uri'           => ['ldap://ldap1.example.com',
                            'ldap://ldap2.example.com' ],
       'basedn'         => 'o=example org,c=us',
       'ssl'            => 'broken',
@@ -46,7 +46,7 @@ describe 'nss_pam_ldapd::config' do
 
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([
-                      %Q<set uri '#{lp['uris'].join(' ')}'>,
+                      %Q<set uri '#{lp['uri'].join(' ')}'>,
                       %Q<set basedn '#{lp['basedn']}'>,
                       %Q<set ssl '#{lp['ssl']}'>,
                       %Q<set tls_checkpeer '#{lp['tls_checkpeer']}'>,
@@ -70,7 +70,7 @@ describe 'nss_pam_ldapd::config' do
 
   context 'uri param as single-value array' do
 
-    let(:params) {{ :ldap => { 'uris' => ['ldap://ldap1 ldap://ldap2'] } }}
+    let(:params) {{ :ldap => { 'uri' => ['ldap://ldap1 ldap://ldap2'] } }}
 
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([ %q<set uri 'ldap://ldap1 ldap://ldap2'> ])
@@ -80,7 +80,7 @@ describe 'nss_pam_ldapd::config' do
 
   context 'uri param as string' do
 
-    let(:params) {{ :ldap => { 'uris' => 'ldap://ldap1 ldap://ldap2' } }}
+    let(:params) {{ :ldap => { 'uri' => 'ldap://ldap1 ldap://ldap2' } }}
 
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([ %q<set uri 'ldap://ldap1 ldap://ldap2'> ])

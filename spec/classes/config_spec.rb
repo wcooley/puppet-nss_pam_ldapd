@@ -87,4 +87,30 @@ describe 'nss_pam_ldapd::config' do
     }
 
   end
+
+  context 'compat param uris: only uris' do
+
+    let(:params) {{ :ldap => { 'uris' => ['ldap://ldap1', 'ldap://ldap2'] } }}
+
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([ %q<set uri 'ldap://ldap1 ldap://ldap2'> ])
+    }
+
+  end
+
+  context 'compat param uris: uri wins' do
+
+    let(:params) {{
+      :ldap    => {
+        'uri'  => ['ldap://ldap1', 'ldap://ldap2'],
+        'uris' => ['ldap://ldap3', 'ldap://ldap4'],
+      }
+    }}
+
+    it { should contain_augeas('/etc/nslcd.conf') \
+      .with_changes([ %q<set uri 'ldap://ldap1 ldap://ldap2'> ])
+    }
+
+  end
+
 end

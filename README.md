@@ -11,11 +11,11 @@ Example
 In `hieradata/global.yaml`:
 
     nss_pam_ldapd::config::ldap:
-        uris:
+        uri:
             - ldap://ldap1.example.com
             - ldap://ldap2.example.com
             - ldap://ldap3.example.com
-        basedn: dc=pdx,dc=edu
+        base: dc=pdx,dc=edu
         ssl: start_tls
         tls_cacertdir: /etc/openldap/cacerts
         tls_reqcert: never

@@ -1,3 +1,43 @@
+#
+# == Class: nss_pam_ldapd::config
+#
+# Manage configuration file +/etc/nslcd.conf+.
+#
+# === Parameters
+#
+# [*ldap*]
+#   Hash containing the following parameters, which are documented in
+#   +nslcd.conf(5)+:
+#
+#   [*uri*]
+#     Array or string of URIs of LDAP servers
+#
+#   [*base*]
+#   [*ssl*]
+#   [*tls_checkpeer*]
+#   [*tls_cacertdir*]
+#   [*tls_reqcert*]
+#   [*timelimit*]
+#   [*bind_timelimit*]
+#   [*idle_timelimit*]
+#
+#   The following hash keys for *ldap* are supported for backwards
+#   compatibility, but should not be used:
+#     [*uris*]
+#     [*basedn*]
+#
+# [*template*]
+#   *Deprecated* - Unused name of template file.
+#
+# === Limitations
+#
+# This module uses the *Spacevars* Augeas lens, which assumes that the first
+# word of each line is a unique key, which is not necessarily true for a number
+# of parameters, such as *base*, *scope*, *filter* or *map*.
+#
+# Handling these parameters correctly requires writing a lens, which is a good
+# deal more work.
+#
 class nss_pam_ldapd::config (
   $ldap = hiera('nss_pam_ldapd::config::ldap', {
         uri           => [ 'ldap://localhost', ],

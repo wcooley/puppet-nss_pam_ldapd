@@ -44,13 +44,6 @@ describe 'nss_pam_ldapd::config' do
 
     let(:params) {{ :ldap => lp }}
 
-    it { should contain_file('/etc/nslcd.conf') \
-        .with_mode('0400')  \
-        .with_owner('root') \
-        .with_group('root')
-
-    }
-
     it { should contain_augeas('/etc/nslcd.conf') \
       .with_changes([
                       %Q<set uri '#{lp['uris'].join(' ')}'>,

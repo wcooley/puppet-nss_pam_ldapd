@@ -10,8 +10,12 @@ class nss_pam_ldapd::config (
         bind_timelimit => 120,
         idle_timelimit => 3600,
       }),
-  $template = 'nss_pam_ldapd/nslcd.conf.erb'
+  $template = undef
   ) {
+
+  if $template {
+    warning("${name} param 'template' is deprecated; please remove")
+  }
 
   if has_key($ldap, 'uri') {
     $ldap_uri_val = is_array($ldap['uri']) ? {

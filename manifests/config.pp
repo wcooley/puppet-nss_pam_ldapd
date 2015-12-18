@@ -125,7 +125,7 @@ class nss_pam_ldapd::config (
         default => undef,
       }
 
-  $augeas_changes = grep([
+  $augeas_changes = delete_undef_values(grep([
       $aug_uri,
       $aug_base,
       $aug_ssl,

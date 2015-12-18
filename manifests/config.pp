@@ -20,6 +20,8 @@
 #   [*timelimit*]
 #   [*bind_timelimit*]
 #   [*idle_timelimit*]
+#   [*binddn*]
+#   [*bindpw*]
 #
 #   The following hash keys for *ldap* are supported for backwards
 #   compatibility, but should not be used:
@@ -49,6 +51,8 @@ class nss_pam_ldapd::config (
         timelimit      => 120,
         bind_timelimit => 120,
         idle_timelimit => 3600,
+        binddn         => undef,
+        bindpw         => undef
       }),
   $template = undef
   ) {
@@ -125,6 +129,16 @@ class nss_pam_ldapd::config (
         default => undef,
       }
 
+  $aug_binddn = has_key($ldap, 'binddn') ? {
+        true    => "set binddn '${ldap['binddn']}'",
+        default => undef,
+      }
+
+  $aug_bindpw = has_key($ldap, 'bindpw') ? {
+        true    => "set bindpw '${ldap['bindpw']}'",
+        default => undef,
+      }
+
   $augeas_changes = delete_undef_values(grep([
       $aug_uri,
       $aug_base,
@@ -135,7 +149,9 @@ class nss_pam_ldapd::config (
       $aug_timelimit,
       $aug_bind_timelimit,
       $aug_idle_timelimit,
-  ], '.')
+      $aug_binddn,
+      $aug_bindpw
+  ], '.'))
 
   file { '/etc/nslcd.conf':
     mode    => '0400',
